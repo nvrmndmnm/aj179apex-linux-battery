@@ -4,6 +4,7 @@ set -e
 
 if [ "$EUID" -ne 0 ]; then
   echo "Fatal: Deployment requires elevated privileges. Run as root (sudo ./install.sh)."
+  echo "Reason: The installer needs to deploy systemd services, install libraries, and add udev rules to permit raw USB access."
   exit 1
 fi
 
@@ -34,7 +35,7 @@ make install
 echo "Please click and move your mouse now to wake it up."
 read -p "Press [Enter] once your mouse is awake..."
 
-read -p "Do you want to configure custom mouse IDs? (Default is Ajazz AJ179: 249a/5c2f) [y/N]: " config_choice
+read -p "Do you want to configure custom mouse IDs? (Default is Ajazz 2.4G 8K Dongle: 3151/5007) [y/N]: " config_choice
 if [[ "$config_choice" =~ ^[Yy]$ ]]; then
     read -p "Enter Vendor ID (e.g. 249a): " VENDOR_ID
     read -p "Enter Product ID (e.g. 5c2f): " PRODUCT_ID
